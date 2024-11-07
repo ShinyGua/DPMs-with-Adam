@@ -1,0 +1,33 @@
+data:
+  data_root_path: datasets
+  dataset_name: CELEBA
+  img_size: 64
+
+model:
+  batch_size: 8
+  ddpm:
+    type: "simple"
+    in_channels: 3
+    out_ch: 3
+    ch: 128
+    ch_mult: [1, 2, 2, 2, 4]
+    num_res_blocks: 2
+    attn_resolutions: [16, ]
+    dropout: 0.1
+    var_type: fixedlarge
+    ema_rate: 0.9999
+    ema: True
+    resamp_with_conv: True
+    initial_checkpoint: "ckpt/CELEBA.ckpt"
+
+dm:
+  schedule_name: linear
+  num_diffusion_timesteps: 1000
+  sample_timesteps: 100
+  beta_start: 0.0001
+  beta_end: 0.02
+
+workers: 8
+seed: 1000
+log_freq: 1
+#ascending: False
